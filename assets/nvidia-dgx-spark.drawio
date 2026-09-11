@@ -1,6 +1,6 @@
 <mxfile host="Electron">
   <diagram name="connext-ai-on-prem architecture" id="0">
-    <mxGraphModel dx="1989" dy="1441" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1920" pageHeight="1200" math="0" shadow="0">
+    <mxGraphModel dx="1591" dy="1153" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1920" pageHeight="1200" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -16,13 +16,13 @@
         <mxCell id="vllm" parent="docker" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff9c4;strokeColor=#f9a825;strokeWidth=2;" value="vllm/vllm-openai:latest" vertex="1">
           <mxGeometry height="288.02" width="310" x="24" y="14" as="geometry" />
         </mxCell>
-        <mxCell id="model" parent="vllm" style="shape=cylinder3;whiteSpace=wrap;html=1;fillColor=#e1f5fe;strokeColor=#0288d1;" value="nvidia/Qwen3.6-27B-NVFP4" vertex="1">
+        <mxCell id="model" parent="vllm" style="shape=cylinder3;whiteSpace=wrap;html=1;fillColor=#e1f5fe;strokeColor=#0288d1;" value="Qwen/Qwen3.6-35B-A3B" vertex="1">
           <mxGeometry height="86.55333333333334" width="183.70171125572423" x="57.406784767413825" y="36.0638888888889" as="geometry" />
         </mxCell>
         <mxCell id="server" parent="vllm" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fce4ec;strokeColor=#c2185b;" value="vLLM OpenAI-compatible API" vertex="1">
           <mxGeometry height="52.13" width="199.13521330441068" x="49.689660159074485" y="166.91" as="geometry" />
         </mxCell>
-        <mxCell id="parsers" parent="vllm" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f1f8e9;strokeColor=#689f38;fontSize=11;" value="Parsers: qwen3_coder (tool)&#xa;qwen3 (reasoning)" vertex="1">
+        <mxCell id="parsers" parent="vllm" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f1f8e9;strokeColor=#689f38;fontSize=11;" value="Parsers: qwen3_xml (tool)&lt;br&gt;qwen3 (reasoning)" vertex="1">
           <mxGeometry height="50" width="212.24352856109905" x="48.87375271149674" y="228.91000000000003" as="geometry" />
         </mxCell>
         <mxCell id="e1" edge="1" parent="vllm" source="model" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;" target="server" value="">
@@ -49,11 +49,17 @@
         <mxCell id="e4" edge="1" parent="1" source="port" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#ef6c00;" target="client" value="API requests">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="hub" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e8eaf6;strokeColor=#3f51b5;" value="Hugging Face Hub&#xa;(model download)" vertex="1">
-          <mxGeometry height="50" width="180" x="1207" y="210.28" as="geometry" />
+        <mxCell id="hub" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e8eaf6;strokeColor=#3f51b5;" value="Hugging Face Hub&lt;br&gt;(model repositor)" vertex="1">
+          <mxGeometry height="50" width="180" x="1087" y="210.28" as="geometry" />
         </mxCell>
         <mxCell id="e5" edge="1" parent="1" source="hub" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;dashed=1;" target="hfcache" value="hf download">
-          <mxGeometry relative="1" as="geometry" />
+          <mxGeometry relative="1" x="-0.5656" as="geometry">
+            <mxPoint as="offset" />
+            <Array as="points">
+              <mxPoint x="1018" y="235.28" />
+              <mxPoint x="1018" y="235.28" />
+            </Array>
+          </mxGeometry>
         </mxCell>
       </root>
     </mxGraphModel>
