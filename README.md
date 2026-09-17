@@ -21,5 +21,5 @@ The script downloads the model, pulls the vLLM image, and starts the server (def
 ## Contents
 
 - [nvidia-dgx-spark/vllm-server](nvidia-dgx-spark/vllm-server) — start/stop script for the vLLM server
-- [nvidia-dgx-spark/sparkrun-models.md](nvidia-dgx-spark/sparkrun-models.md) — models supported by `sparkrun` with ≥ 8B active parameters
+- [nvidia-dgx-spark/models-and-recipes.md](nvidia-dgx-spark/models-and-recipes.md) — curated DGX Spark GB10 model-serving recipes, runtimes, and deployment resources
 - [assets/](assets/) — architecture diagram (drawio source and rendered SVG)
