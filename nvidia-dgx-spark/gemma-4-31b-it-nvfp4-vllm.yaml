@@ -1,0 +1,37 @@
+recipe_version: "2"
+model: nvidia/Gemma-4-31B-IT-NVFP4
+# model: google/gemma-4-31B-it
+runtime: vllm
+max_nodes: 1
+container: ghcr.io/spark-arena/dgx-vllm-eugr-nightly:latest
+
+executor_config:
+  entrypoint: ""
+
+metadata:
+  description: vLLM serving nvidia/Gemma-4-31B-IT-NVFP4 on a single DGX Spark
+
+defaults:
+  port: 8000
+  host: 0.0.0.0
+  tensor_parallel: 1
+  max_model_len: 262144
+  max_num_batched_tokens: 32768
+  gpu_memory_utilization: 0.8
+  load_format: instanttensor
+  speculative_config: '{"method":"mtp","model":"google/gemma-4-31B-it-assistant","num_speculative_tokens":4}'
+
+command: |
+  vllm serve {model} \
+    --host {host} \
+    --port {port} \
+    --enable-prefix-caching \
+    --enable-auto-tool-choice \
+    --tool-call-parser gemma4 \
+    --reasoning-parser gemma4 \
+    --max-model-len {max_model_len} \
+    --gpu-memory-utilization {gpu_memory_utilization} \
+    --max-num-batched-tokens {max_num_batched_tokens} \
+    --load-format {load_format} \
+    --speculative-config '{speculative_config}' \
+    --tensor-parallel-size {tensor_parallel}
