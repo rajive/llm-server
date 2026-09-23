@@ -144,25 +144,9 @@ not evidence of a Spark deployment.
 | `lukealonso/GLM-4.6-NVFP4` | [NVIDIA forum report](https://forums.developer.nvidia.com/t/353723) | Forum-reported, 2 Sparks |
 | `nemotron-3-super:120b` | [NVIDIA forum report](https://forums.developer.nvidia.com/t/364355) | Ollama/OpenShell, not vLLM |
 
-## Using recipes with this repository
+## Local launch files
 
-The [local `vllm-server` script](vllm-server) downloads and launches
-`Qwen/Qwen3.6-35B-A3B` with `vllm/vllm-openai:latest`, TP1, and a configured
-131,072-token maximum context. That is **not** the [Spark Arena FP8
-profile](https://github.com/spark-arena/recipe-registry/blob/main/official-recipes/qwen3.6/vllm/qwen3.6-35b-a3b-fp8-vllm.yaml)
-in the table: it names `Qwen/Qwen3.6-35B-A3B-FP8`, its own image and mods, and
-a 262,144-token context setting. The [upstream vLLM GB10
-variant](https://recipes.vllm.ai/Qwen/Qwen3.6-35B-A3B/hw/dgx_spark_gb10.json)
-uses the same checkpoint as the local script but different parser and runtime
-settings. Neither source validates the local launch command as a whole.
-Follow the exact GB10 variant or registry launcher and its runtime requirements
-when reproducing a listed profile; do not swap only the model name in the local
-script.
-
-The [single-Spark Atlas Gemma 4 recipe](https://github.com/Avarok-Cybersecurity/atlas-recipes/blob/main/recipes/gemma4/gemma-4-31b-nvfp4.yaml)
-uses the Atlas runtime. It is not a drop-in model selection for the local vLLM
-script. This repository does not include run records validating its local
-launcher against the inventory profiles.
+This repository also includes local launch files documented in the [README](../README.md#quick-start). They are convenience configurations, not independent evidence that a deployment has been validated or benchmarked. Do not infer that a local file reproduces an external profile from a matching model family alone; compare the exact checkpoint, runtime, image, and launch settings before treating them as equivalent.
 
 ## Operational resources
 
