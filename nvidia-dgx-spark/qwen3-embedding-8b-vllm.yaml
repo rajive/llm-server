@@ -1,0 +1,32 @@
+recipe_version: "2"
+model: Qwen/Qwen3-Embedding-8B
+runtime: vllm
+max_nodes: 1
+container: ghcr.io/spark-arena/dgx-vllm-eugr-nightly:latest
+
+executor_config:
+  entrypoint: ""
+
+metadata:
+  description: vLLM embedding service for Qwen/Qwen3-Embedding-8B on a single DGX Spark
+  model_params: 8B
+  model_dtype: bf16
+
+readiness:
+  inference: false
+
+defaults:
+  port: 8002
+  host: 0.0.0.0
+  tensor_parallel: 1
+  max_model_len: 32768
+  gpu_memory_utilization: 0.25
+
+command: |
+  vllm serve {model} \
+    --runner pooling \
+    --host {host} \
+    --port {port} \
+    --max-model-len {max_model_len} \
+    --gpu-memory-utilization {gpu_memory_utilization} \
+    --tensor-parallel-size {tensor_parallel}
