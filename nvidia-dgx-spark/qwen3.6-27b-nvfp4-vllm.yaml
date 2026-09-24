@@ -1,0 +1,30 @@
+recipe_version: "2"
+model: nvidia/Qwen3.6-27B-NVFP4
+runtime: vllm
+max_nodes: 1
+container: ghcr.io/spark-arena/dgx-vllm-eugr-nightly:latest
+
+executor_config:
+  entrypoint: ""
+
+metadata:
+  description: vLLM serving nvidia/Qwen3.6-27B-NVFP4 on a single DGX Spark
+
+defaults:
+  port: 8000
+  host: 0.0.0.0
+  tensor_parallel: 1
+  max_model_len: 262144
+  gpu_memory_utilization: 0.8
+
+command: |
+  vllm serve {model} \
+    --host {host} \
+    --port {port} \
+    --enable-prefix-caching \
+    --enable-auto-tool-choice \
+    --tool-call-parser qwen3_coder \
+    --reasoning-parser qwen3 \
+    --max-model-len {max_model_len} \
+    --gpu-memory-utilization {gpu_memory_utilization} \
+    --tensor-parallel-size {tensor_parallel}

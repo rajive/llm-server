@@ -16,18 +16,18 @@ export MAX_MODEL_LEN=131072
 
 # Recommended starting point for any model that fits in memory on a single node
 docker run -d \
-	--name vllm-server-${MODEL_HANDLE//\//-} \
-	--gpus all \
-	--ipc host \
-	--ulimit memlock=-1 \
-	--ulimit stack=67108864 \
-	--entrypoint "" \
-	-p 8000:8000 \
-	-v "$HOME/.cache/huggingface/hub:/root/.cache/huggingface/hub" \
-	"$VLLM_IMAGE" \
-	vllm serve "$MODEL_HANDLE" \
-	--enable-auto-tool-choice \
-	--tool-call-parser qwen3_coder \
-	--reasoning-parser qwen3 \
-	--max-model-len $MAX_MODEL_LEN \
-	--gpu-memory-utilization 0.8
+  --name vllm-server-${MODEL_HANDLE//\//-} \
+  --gpus all \
+  --ipc host \
+  --ulimit memlock=-1 \
+  --ulimit stack=67108864 \
+  --entrypoint "" \
+  -p 8000:8000 \
+  -v "$HOME/.cache/huggingface/hub:/root/.cache/huggingface/hub" \
+  "$VLLM_IMAGE" \
+  vllm serve "$MODEL_HANDLE" \
+  --enable-auto-tool-choice \
+  --tool-call-parser qwen3_coder \
+  --reasoning-parser qwen3 \
+  --max-model-len $MAX_MODEL_LEN \
+  --gpu-memory-utilization 0.8
