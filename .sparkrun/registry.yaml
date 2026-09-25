@@ -1,0 +1,6 @@
+registries:
+  - name: rajive
+    description: DGX Spark inference recipes maintained by Rajive
+    subpath: nvidia-dgx-spark
+    enabled: true
+    visible: true

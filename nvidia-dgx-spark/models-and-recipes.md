@@ -144,9 +144,9 @@ not evidence of a Spark deployment.
 | `lukealonso/GLM-4.6-NVFP4` | [NVIDIA forum report](https://forums.developer.nvidia.com/t/353723) | Forum-reported, 2 Sparks |
 | `nemotron-3-super:120b` | [NVIDIA forum report](https://forums.developer.nvidia.com/t/364355) | Ollama/OpenShell, not vLLM |
 
-## Local launch files
+## Repository recipes
 
-This repository also includes local launch files documented in the [README](../README.md#quick-start). They are convenience configurations, not independent evidence that a deployment has been validated or benchmarked. Do not infer that a local file reproduces an external profile from a matching model family alone; compare the exact checkpoint, runtime, image, and launch settings before treating them as equivalent.
+This repository publishes [Sparkrun recipes](../README.md#recipes). They are convenience configurations, not independent evidence that a deployment has been validated or benchmarked. Do not infer that a local file reproduces an external profile from a matching model family alone; compare the exact checkpoint, runtime, image, and launch settings before treating them as equivalent.
 
 ## Operational resources
 
