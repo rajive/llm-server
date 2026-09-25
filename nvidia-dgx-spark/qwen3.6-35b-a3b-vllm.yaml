@@ -1,14 +1,14 @@
 recipe_version: "2"
 model: Qwen/Qwen3.6-35B-A3B
 runtime: vllm
-max_nodes: 1
+min_nodes: 1
 container: ghcr.io/spark-arena/dgx-vllm-eugr-nightly:latest
 
 executor_config:
   entrypoint: ""
 
 metadata:
-  description: vLLM serving Qwen/Qwen3.6-35B-A3B on a single DGX Spark
+  description: vLLM serving Qwen/Qwen3.6-35B-A3B on DGX Spark, single-node or tensor-parallel cluster
 
 defaults:
   port: 8000

@@ -1,14 +1,14 @@
 recipe_version: "2"
 model: nvidia/Qwen3.6-27B-NVFP4
 runtime: vllm
-max_nodes: 1
+min_nodes: 1
 container: ghcr.io/spark-arena/dgx-vllm-eugr-nightly:latest
 
 executor_config:
   entrypoint: ""
 
 metadata:
-  description: vLLM serving nvidia/Qwen3.6-27B-NVFP4 on a single DGX Spark
+  description: vLLM serving nvidia/Qwen3.6-27B-NVFP4 on DGX Spark, single-node or tensor-parallel cluster
 
 defaults:
   port: 8000

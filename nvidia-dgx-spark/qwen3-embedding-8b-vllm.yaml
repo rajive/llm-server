@@ -1,14 +1,14 @@
 recipe_version: "2"
 model: Qwen/Qwen3-Embedding-8B
 runtime: vllm
-max_nodes: 1
+min_nodes: 1
 container: ghcr.io/spark-arena/dgx-vllm-eugr-nightly:latest
 
 executor_config:
   entrypoint: ""
 
 metadata:
-  description: vLLM embedding service for Qwen/Qwen3-Embedding-8B on a single DGX Spark
+  description: vLLM embedding service for Qwen/Qwen3-Embedding-8B on DGX Spark
   model_params: 8B
   model_dtype: bf16
 

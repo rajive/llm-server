@@ -1,14 +1,14 @@
 recipe_version: "2"
 model: BAAI/bge-m3
 runtime: vllm
-max_nodes: 1
+min_nodes: 1
 container: ghcr.io/spark-arena/dgx-vllm-eugr-nightly:latest
 
 executor_config:
   entrypoint: ""
 
 metadata:
-  description: vLLM dense embedding service for BAAI/bge-m3 on a single DGX Spark
+  description: vLLM dense embedding service for BAAI/bge-m3 on DGX Spark
   model_params: 568M
   model_dtype: fp32
 
