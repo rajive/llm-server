@@ -34,6 +34,8 @@ guarantee.
   label; namespace is provenance, not a measure of validation.
 - **Community recipe listed**: a maintained Spark-specific recipe exists
   outside Spark Arena.
+- **Poolside local setup guide**: Poolside's local deployment documentation
+  explicitly lists DGX Spark support for the model and runtime.
 - **Forum report**: a user-reported deployment without a maintained recipe.
 
 An **experimental deployment** is a separate qualification: the profile
@@ -64,6 +66,7 @@ profiles use the Atlas runtime.
 | Model | Total Params | Active Params | Topology | Recipe(s) | Evidence | Requirements |
 |---|---:|---:|---:|---|---|---|
 | Nemotron-3-Ultra NVFP4 | 550B | 55B | 4 Sparks | [Eugr community — NVFP4 YAML](https://github.com/eugr/spark-vllm-docker/blob/main/recipes/4x-spark-cluster/nemotron-3-ultra-nvfp4.yaml) | Community recipe listed | Experimental cluster image |
+| GLM-5.2 NVFP4 | 743B | 39B | 8 Sparks | [Eugr community — NVFP4 YAML](https://github.com/eugr/spark-vllm-docker/blob/main/recipes/8x-spark-cluster/glm-5.2-nvfp4.yaml) | Community recipe listed | Experimental runtime/image |
 | Gemma 4 31B NVFP4 | 31B | 31B | 1 Spark | [Atlas community — NVFP4 YAML](https://github.com/Avarok-Cybersecurity/atlas-recipes/blob/main/recipes/gemma4/gemma-4-31b-nvfp4.yaml) | Community recipe listed | — |
 | Qwen3.5-27B NVFP4 | 27B | 27B | 1 Spark | [Atlas community — NVFP4 YAML](https://github.com/Avarok-Cybersecurity/atlas-recipes/blob/main/recipes/qwen3.5/qwen3.5-27b-dense-nvfp4.yaml) | Community recipe listed | — |
 | Qwen3.6-27B FP8 | 27B | 27B | 1 Spark | [Spark Arena official — FP8 YAML](https://github.com/spark-arena/recipe-registry/blob/main/official-recipes/qwen3.6/vllm/qwen3.6-27b-fp8-vllm.yaml) | Spark Arena recipe listed | — |
@@ -72,26 +75,26 @@ profiles use the Atlas runtime.
 | GLM-5.3-Flash NVFP4 | 321B | 18B | 2 Sparks | [Eugr community — NVFP4 YAML](https://github.com/eugr/spark-vllm-docker/blob/main/recipes/glm-5.3-flash.yaml) | Community recipe listed | Requires experimental B12X image; recipe uses MTP speculative decoding |
 | Qwen3.5-397B-A17B INT4 | 397B | 17B | 2 Sparks | [Spark Arena experimental — 2-Spark INT4 YAML](https://github.com/spark-arena/recipe-registry/blob/main/experimental-recipes/eugr-vllm/qwen3.5-397b-a17b-int4-autoround-2x-vllm.yaml); [Eugr community — 3-Spark INT4](https://github.com/eugr/spark-vllm-docker/blob/main/recipes/3x-spark-cluster/qwen3.5-397b-int4-autoround.yaml); [Eugr community — 4-Spark FP8](https://github.com/eugr/spark-vllm-docker/blob/main/recipes/4x-spark-cluster/qwen3.5-397b-a17B-fp8.yaml) | Spark Arena recipe listed | Custom image and chat-template patch |
 | DeepSeek-V4-Flash-0731 | 304B | 13B | 2 Sparks | [Spark Arena official — B12X/DSpark YAML](https://github.com/spark-arena/recipe-registry/blob/main/official-recipes/deepseek4-flash/deepseek-v4-flash-0731-b12x-dspark-vllm.yaml); [Eugr community — B12X/DSpark recipe](https://github.com/eugr/spark-vllm-docker/blob/main/recipes/deepseek-v4-flash-0731.yaml) | Spark Arena recipe listed | Both profiles require the experimental B12X stack and configure DSpark speculative decoding. Spark Arena additionally applies `instanttensor-hybrid-draft-loader`. The NVFP4 model-card evaluation used B200 and did not exercise speculative decoding; it does not validate these Spark profiles. |
+| Inkling-Small NVFP4 | 276B | 12B | 2 Sparks | [Eugr community — NVFP4 YAML](https://github.com/eugr/spark-vllm-docker/blob/main/recipes/inkling-small-nvfp4.yaml) | Community recipe listed | Experimental |
 | Nemotron-3-Super-120B-A12B NVFP4 | 120B | 12B | 1 Spark | [Spark Arena experimental — 1-Spark NVFP4 YAML](https://github.com/spark-arena/recipe-registry/blob/main/experimental-recipes/nemotron-3-super/nemotron-3-super-nvfp4-mtp-1x-vllm.yaml); [Eugr community — 2-Spark recipe](https://github.com/eugr/spark-vllm-docker/blob/main/recipes/nemotron-3-super-nvfp4.yaml) | Spark Arena recipe listed | — |
+| Step 3.7 Flash NVFP4 | 198B | 11B | 2 Sparks | [Eugr community — NVFP4 YAML](https://github.com/eugr/spark-vllm-docker/blob/main/recipes/step-3.7-flash-nvfp4.yaml) | Community recipe listed | — |
 | MiniMax-M2.7 AWQ | 230B | 10B | 2 Sparks | [Spark Arena official — AWQ YAML](https://github.com/spark-arena/recipe-registry/blob/main/official-recipes/minimax-m2.7/minimax-m2.7-awq4-vllm.yaml) | Spark Arena recipe listed | — |
 | Qwen3.5-122B-A10B NVFP4 | 122B | 10B | 1 Spark | [Atlas community — 1-Spark NVFP4 YAML](https://github.com/Avarok-Cybersecurity/atlas-recipes/blob/main/recipes/qwen3.5/qwen3.5-122b-a10b-nvfp4-single.yaml); [Eugr community — INT4 2-Spark recipe](https://github.com/eugr/spark-vllm-docker/blob/main/recipes/qwen3.5-122b-int4-autoround.yaml) | Community recipe listed | Atlas 1-Spark profile has tight KV-cache headroom |
+| Poolside Laguna S 2.1 `q4_k_m` (`laguna-s-2.1:latest`) | 118B | 8B | 1 Spark | [Poolside — local Ollama setup](https://docs.poolside.ai/resources/run-model-locally); [Hugging Face — weights](https://huggingface.co/poolside/Laguna-S-2.1) | Poolside local setup guide | Ollama; default `q4_k_m` weights are about 75 GB; Poolside recommends 32K–64K context on 128 GB unified memory; checked 2026-09-28 |
 | Mistral Small 4 FP8 | 119B | 6.5B | 2 Sparks | [Spark Arena community — FP8 YAML](https://github.com/spark-arena/community-recipe-registry/blob/main/recipes/mistral-small-4-119b-2603/t4cmyk/mistral-small-4-119b-2603-fp8-vllm-t4cmyk.yaml) | Spark Arena recipe listed | — |
 | Qwen3.8-Flash-Next NVFP4 | 176B | 6B | 1 Spark | [Eugr community — 1-Spark YAML](https://github.com/eugr/spark-vllm-docker/blob/main/recipes/qwen3.8-flash-next-nvfp4-solo.yaml); [Eugr community — 2-Spark YAML](https://github.com/eugr/spark-vllm-docker/blob/main/recipes/qwen3.8-flash-next-nvfp4-cluster.yaml) | Community recipe listed | 1-Spark profile requires PLE table disk offload and experimental B12X |
-| GPT-OSS-20B | 21B | 3.6B | 1 Spark | [NVIDIA playbook — SGLang deployment](https://build.nvidia.com/spark/sglang) | NVIDIA playbook | — |
-| GPT-OSS-120B | 120B | 5.1B | 1 Spark | [Eugr community — vLLM YAML](https://github.com/eugr/spark-vllm-docker/blob/main/recipes/openai-gpt-oss-120b.yaml) | Community recipe listed | Use the recipe's model-specific image and launch settings |
 | Ling-3.0-flash FP4 / INT4 | 124B | 5.5B | 1 Spark | [vLLM — GB10 variants](https://recipes.vllm.ai/inclusionAI/Ling-3.0-flash?hw=dgx_spark_gb10) | GB10 verified | GB10 support is for TP1 FP4/INT4; BF16 and FP8 exceed unified memory |
+| GPT-OSS-120B | 120B | 5.1B | 1 Spark | [Eugr community — vLLM YAML](https://github.com/eugr/spark-vllm-docker/blob/main/recipes/openai-gpt-oss-120b.yaml) | Community recipe listed | Use the recipe's model-specific image and launch settings |
 | Gemma 4 26B-A4B NVFP4 | 26B | 4B | 1 Spark | [Atlas community — NVFP4 YAML](https://github.com/Avarok-Cybersecurity/atlas-recipes/blob/main/recipes/gemma4/gemma-4-26b-a4b-nvfp4.yaml) | Community recipe listed | — |
+| GPT-OSS-20B | 21B | 3.6B | 1 Spark | [NVIDIA playbook — SGLang deployment](https://build.nvidia.com/spark/sglang) | NVIDIA playbook | — |
 | Qwen3-Next-80B-A3B NVFP4 | 80B | 3B | 1 Spark | [Atlas community — NVFP4 YAML](https://github.com/Avarok-Cybersecurity/atlas-recipes/blob/main/recipes/qwen3-next/qwen3-next-80b-a3b-nvfp4.yaml) | Community recipe listed | — |
-| GLM-4.7-Flash AWQ | 30B | 3B | 1 Spark | [Eugr community — AWQ YAML](https://github.com/eugr/spark-vllm-docker/blob/main/recipes/glm-4.7-flash-awq.yaml) | Community recipe listed | Recipe describes a speed patch, but leaves it disabled; enable it for the stated inference-speed optimization |
-| Nemotron-3-Nano-30B-A3B NVFP4 | 30B | 3B | 1 Spark | [Atlas community — NVFP4 YAML](https://github.com/Avarok-Cybersecurity/atlas-recipes/blob/main/recipes/nemotron-3-nano/nemotron-3-nano-30b-a3b-nvfp4.yaml) | Community recipe listed | — |
-| Nemotron-3.5-Lightning-30B-A3B | 30B | 3B | 1 Spark | [Eugr community — DSpark YAML](https://github.com/eugr/spark-vllm-docker/blob/main/recipes/nemotron-3.5-lightning.yaml) | Community recipe listed | Recipe defaults to TP=2 for a cluster; use TP=1 for the listed single-Spark profile. DSpark speculative decoding is configured. |
-| North-Mini-Code-1.0 FP8 | 30B | 3B | 1 Spark | [Spark Arena community — FP8 YAML](https://github.com/spark-arena/community-recipe-registry/blob/main/recipes/north-mini-code-1.0/XanuNetworks/north-mini-code-1.0-fp8-vllm-XanuNetworks.yaml) | Spark Arena recipe listed | — |
 | Qwen3.5-35B-A3B NVFP4 | 35B | 3B | 1 Spark | [Atlas community — NVFP4 YAML](https://github.com/Avarok-Cybersecurity/atlas-recipes/blob/main/recipes/qwen3.5/qwen3.5-35b-a3b-nvfp4.yaml) | Community recipe listed | — |
 | Qwen3.6-35B-A3B FP8 | 35B | 3B | 1 Spark | [Spark Arena official — FP8 YAML](https://github.com/spark-arena/recipe-registry/blob/main/official-recipes/qwen3.6/vllm/qwen3.6-35b-a3b-fp8-vllm.yaml); [vLLM — upstream GB10 profile](https://recipes.vllm.ai/Qwen/Qwen3.6-35B-A3B/hw/dgx_spark_gb10.json) | Spark Arena recipe listed | Follow the chosen profile; settings differ |
+| GLM-4.7-Flash AWQ | 30B | 3B | 1 Spark | [Eugr community — AWQ YAML](https://github.com/eugr/spark-vllm-docker/blob/main/recipes/glm-4.7-flash-awq.yaml) | Community recipe listed | Recipe describes a speed patch, but leaves it disabled; enable it for the stated inference-speed optimization |
+| Nemotron-3.5-Lightning-30B-A3B | 30B | 3B | 1 Spark | [Eugr community — DSpark YAML](https://github.com/eugr/spark-vllm-docker/blob/main/recipes/nemotron-3.5-lightning.yaml) | Community recipe listed | Recipe defaults to TP=2 for a cluster; use TP=1 for the listed single-Spark profile. DSpark speculative decoding is configured. |
+| Nemotron-3-Nano-30B-A3B NVFP4 | 30B | 3B | 1 Spark | [Atlas community — NVFP4 YAML](https://github.com/Avarok-Cybersecurity/atlas-recipes/blob/main/recipes/nemotron-3-nano/nemotron-3-nano-30b-a3b-nvfp4.yaml) | Community recipe listed | — |
+| North-Mini-Code-1.0 FP8 | 30B | 3B | 1 Spark | [Spark Arena community — FP8 YAML](https://github.com/spark-arena/community-recipe-registry/blob/main/recipes/north-mini-code-1.0/XanuNetworks/north-mini-code-1.0-fp8-vllm-XanuNetworks.yaml) | Spark Arena recipe listed | — |
 | Qwen3.5-0.8B BF16 | 0.8B | 0.8B | 1 Spark | [Atlas community — BF16 YAML](https://github.com/Avarok-Cybersecurity/atlas-recipes/blob/main/recipes/qwen3.5/qwen3.5-0.8b-bf16-atlas.yaml) | Community recipe listed | — |
-| Step 3.7 Flash NVFP4 | 198B | 11B | 2 Sparks | [Eugr community — NVFP4 YAML](https://github.com/eugr/spark-vllm-docker/blob/main/recipes/step-3.7-flash-nvfp4.yaml) | Community recipe listed | — |
-| GLM-5.2 NVFP4 | 743B | 39B | 8 Sparks | [Eugr community — NVFP4 YAML](https://github.com/eugr/spark-vllm-docker/blob/main/recipes/8x-spark-cluster/glm-5.2-nvfp4.yaml) | Community recipe listed | Experimental runtime/image |
-| Inkling-Small NVFP4 | 276B | 12B | 2 Sparks | [Eugr community — NVFP4 YAML](https://github.com/eugr/spark-vllm-docker/blob/main/recipes/inkling-small-nvfp4.yaml) | Community recipe listed | Experimental |
 
 ### Vision-language
 
@@ -107,9 +110,9 @@ runtime and endpoints in their recipes.
 
 | Model | Total Params | Active Params | Topology | Recipe(s) | Evidence | Requirements |
 |---|---:|---:|---:|---|---|---|
+| MiniMax-H3 FP8 (one DiT) | 64B | 64B | 1 Spark | [vLLM-Omni — GB10 recipe](https://recipes.vllm.ai/MiniMaxAI/MiniMax-H3?hw=dgx_spark_gb10) | vLLM GB10 verified | Gated weights, current vLLM-Omni main, `--task-type fl2va` or `ref2va`; full BF16 service needs more memory |
 | LTX-2.5-Diffusers FP8 | 19B | 19B | 1 Spark | [vLLM-Omni — GB10 FP8 variant](https://recipes.vllm.ai/Lightricks/LTX-2.5-Diffusers?hw=dgx_spark_gb10) | vLLM GB10 supported, not verified | — |
 | DiffusionGemma 26B-A4B | 26B | 4B | 1 Spark | [Eugr community — BF16 YAML](https://github.com/eugr/spark-vllm-docker/blob/main/recipes/diffusion-gemma-bf16.yaml) | Community recipe listed | — |
-| MiniMax-H3 FP8 (one DiT) | 64B | 64B | 1 Spark | [vLLM-Omni — GB10 recipe](https://recipes.vllm.ai/MiniMaxAI/MiniMax-H3?hw=dgx_spark_gb10) | vLLM GB10 verified | Gated weights, current vLLM-Omni main, `--task-type fl2va` or `ref2va`; full BF16 service needs more memory |
 
 ### Embedding and reranking
 
@@ -229,15 +232,17 @@ When adding a model or recipe:
 
 1. Name the exact model and quantized checkpoint IDs; link the exact variant
    or YAML, not only its model-family page.
-2. Record the published runtime, image tag or source commit, and context
+2. Keep every model table sorted by descending **Active Params**; break ties by
+   descending **Total Params**, then ascending model name.
+3. Record the published runtime, image tag or source commit, and context
    setting when recording a deployment; mark unavailable fields as “not
    published.” An image tag such as `latest` is not an immutable version.
-3. Record the published topology. Call it tested or the smallest tested only
+4. Record the published topology. Call it tested or the smallest tested only
    when a linked run or benchmark supports that claim.
-4. Label custom kernels, forks, patches, loaders, and offload requirements.
-5. Put source provenance in the recipe label and use an evidence category from
+5. Label custom kernels, forks, patches, loaders, and offload requirements.
+6. Put source provenance in the recipe label and use an evidence category from
    the definitions above. Record experimental dependencies separately.
-6. The page-level **Last reviewed** date applies to this inventory snapshot;
+7. The page-level **Last reviewed** date applies to this inventory snapshot;
    update it after an inventory review. For an independently checked entry or
    run, add its check date in the requirements column or linked run record.
    Neither date is a benchmark date unless accompanied by a benchmark result.
